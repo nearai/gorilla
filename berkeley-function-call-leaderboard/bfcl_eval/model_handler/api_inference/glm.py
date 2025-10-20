@@ -20,3 +20,4 @@ class GLMAPIHandler(OpenAICompletionsHandler):
             base_url="https://open.bigmodel.cn/api/paas/v4/",
             timeout=httpx.Timeout(timeout=300.0, connect=8.0),
         )
+        

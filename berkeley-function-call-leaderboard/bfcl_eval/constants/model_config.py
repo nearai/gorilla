@@ -56,6 +56,7 @@ from bfcl_eval.model_handler.local_inference.quick_testing_oss import (
 )
 from bfcl_eval.model_handler.local_inference.qwen import QwenHandler
 from bfcl_eval.model_handler.local_inference.qwen_fc import QwenFCHandler
+from bfcl_eval.model_handler.local_inference.glm_fc import GLMFCHandler
 from bfcl_eval.model_handler.local_inference.salesforce_llama import (
     SalesforceLlamaHandler,
 )
@@ -1071,6 +1072,18 @@ api_inference_model_map = {
         output_price=None,
         is_fc_model=False,
         underscore_to_dot=False,
+    ),
+    "zai-org/GLM-4.5-FC": ModelConfig(
+        model_name="zai-org/GLM-4.5",
+        display_name="GLM-4.5 (FC)",
+        url="https://huggingface.co/zai-org/GLM-4.5",
+        org="Zhipu AI",
+        license="MIT",
+        model_handler=GLMFCHandler,
+        input_price=None,
+        output_price=None,
+        is_fc_model=True,
+        underscore_to_dot=True,
     ),
     "glm-4.5-FC": ModelConfig(
         model_name="glm-4.5",
