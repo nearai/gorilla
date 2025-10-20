@@ -8,7 +8,7 @@ from bfcl_eval.model_handler.api_inference.dm_cito import DMCitoHandler
 from bfcl_eval.model_handler.api_inference.fireworks import FireworksHandler
 from bfcl_eval.model_handler.api_inference.functionary import FunctionaryHandler
 from bfcl_eval.model_handler.api_inference.gemini import GeminiHandler
-from bfcl_eval.model_handler.api_inference.glm import GLMAPIHandler
+from bfcl_eval.model_handler.api_inference.glm import GLMAPIHandler, GLMAPILocalHandler
 from bfcl_eval.model_handler.api_inference.gogoagent import GoGoAgentHandler
 from bfcl_eval.model_handler.api_inference.gorilla import GorillaHandler
 from bfcl_eval.model_handler.api_inference.grok import GrokHandler
@@ -56,7 +56,6 @@ from bfcl_eval.model_handler.local_inference.quick_testing_oss import (
 )
 from bfcl_eval.model_handler.local_inference.qwen import QwenHandler
 from bfcl_eval.model_handler.local_inference.qwen_fc import QwenFCHandler
-from bfcl_eval.model_handler.local_inference.glm_fc import GLMFCHandler
 from bfcl_eval.model_handler.local_inference.salesforce_llama import (
     SalesforceLlamaHandler,
 )
@@ -1079,7 +1078,7 @@ api_inference_model_map = {
         url="https://huggingface.co/zai-org/GLM-4.5",
         org="Zhipu AI",
         license="MIT",
-        model_handler=GLMFCHandler,
+        model_handler=GLMAPILocalHandler,
         input_price=None,
         output_price=None,
         is_fc_model=True,
