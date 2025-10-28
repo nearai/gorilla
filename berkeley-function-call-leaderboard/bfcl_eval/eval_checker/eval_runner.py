@@ -147,20 +147,20 @@ def _evaluate_single_agentic_entry(
         possible_answer_item,
     )
 
-    # if not accuracy_checker_result["valid"]:
-    return {
-        "id": index,
-        "model_name": model_name,
-        "test_category": test_category,
-        "valid": accuracy_checker_result.pop("valid"),
-        "error": accuracy_checker_result,
-        "prompt": prompt_entry["question"],
-        "model_result_raw": model_result_list,
-        "last_non_fc_message": last_unsuccessful_decoding_message,
-        "possible_answer": possible_answer_item,
-    }
+    if not accuracy_checker_result["valid"]:
+        return {
+            "id": index,
+            "model_name": model_name,
+            "test_category": test_category,
+            "valid": accuracy_checker_result.pop("valid"),
+            "error": accuracy_checker_result,
+            "prompt": prompt_entry["question"],
+            "model_result_raw": model_result_list,
+            "last_non_fc_message": last_unsuccessful_decoding_message,
+            "possible_answer": possible_answer_item,
+        }
 
-    # return {"valid": True}
+    return {"valid": True}
 
 
 def _evaluate_single_multi_turn_entry(
@@ -244,20 +244,20 @@ def _evaluate_single_multi_turn_entry(
         model_name,
     )
 
-    # if not accuracy_checker_result["valid"]:
-    return {
-        "id": test_entry_id,
-        "model_name": model_name,
-        "test_category": test_category,
-        "valid": accuracy_checker_result.pop("valid"),
-        "error": accuracy_checker_result,
-        "prompt": prompt_entry,
-        "model_result_raw": model_result_list,
-        "model_result_decoded": multi_turn_model_result_list_decoded,
-        "possible_answer": ground_truth_list,
-    }
+    if not accuracy_checker_result["valid"]:
+        return {
+            "id": test_entry_id,
+            "model_name": model_name,
+            "test_category": test_category,
+            "valid": accuracy_checker_result.pop("valid"),
+            "error": accuracy_checker_result,
+            "prompt": prompt_entry,
+            "model_result_raw": model_result_list,
+            "model_result_decoded": multi_turn_model_result_list_decoded,
+            "possible_answer": ground_truth_list,
+        }
 
-    # return {"valid": True}
+    return {"valid": True}
 
 
 def _evaluate_single_relevance_entry(
@@ -375,20 +375,20 @@ def _evaluate_single_ast_entry(
         model_name,
     )
 
-    # if not checker_result["valid"]:
-    return {
-        "id": index,
-        "model_name": model_name,
-        "test_category": test_category,
-        "valid": checker_result["valid"],
-        "error": checker_result["error"],
-        "error_type": checker_result.get("error_type", None),
-        "prompt": prompt_entry,
-        "model_result_raw": model_result_item_raw,
-        "model_result_decoded": model_result_item,
-        "possible_answer": possible_answer_item,
-    }
-    # return {"valid": True}
+    if not checker_result["valid"]:
+        return {
+            "id": index,
+            "model_name": model_name,
+            "test_category": test_category,
+            "valid": checker_result["valid"],
+            "error": checker_result["error"],
+            "error_type": checker_result["error_type"],
+            "prompt": prompt_entry,
+            "model_result_raw": model_result_item_raw,
+            "model_result_decoded": model_result_item,
+            "possible_answer": possible_answer_item,
+        }
+    return {"valid": True}
 
 
 def format_sensitivity_runner(
@@ -530,9 +530,9 @@ def agentic_runner(
 
         if entry_result["valid"]:
             correct_count += 1
-        # else:
-        entry_result["inference_log"] = model_result[i].get("inference_log", "")
-        result.append(entry_result)
+        else:
+            entry_result["inference_log"] = model_result[i].get("inference_log", "")
+            result.append(entry_result)
 
     return save_eval_results(
         result, correct_count, model_result, test_category, model_name, score_dir
