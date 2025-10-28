@@ -10,7 +10,8 @@ from bfcl_eval.model_handler.utils import convert_to_function_call, default_deco
 
 
 
-class GLMAPIHandler(OpenAICompletionsHandler):
+
+class GPTOSSInternalAPIHandler(OpenAICompletionsHandler):
     def __init__(
         self,
         model_name,
@@ -21,25 +22,8 @@ class GLMAPIHandler(OpenAICompletionsHandler):
     ) -> None:
         super().__init__(model_name, temperature, registry_name, is_fc_model, **kwargs)
         self.client = OpenAI(
-            api_key=os.getenv("GLM_API_KEY"),
-            base_url="https://open.bigmodel.cn/api/paas/v4/",
-            timeout=httpx.Timeout(timeout=300.0, connect=8.0),
-        )
-
-
-class GLMAPILocalHandler(OpenAICompletionsHandler):
-    def __init__(
-        self,
-        model_name,
-        temperature,
-        registry_name,
-        is_fc_model,
-        **kwargs,
-    ) -> None:
-        super().__init__(model_name, temperature, registry_name, is_fc_model, **kwargs)
-        self.client = OpenAI(
-            api_key='none',
-            base_url="http://localhost:30000/v1/",
+            api_key='secret123',
+            base_url="http://154.57.34.78:8002/v1/",
             timeout=httpx.Timeout(timeout=30000.0, connect=8.0),
         )
     

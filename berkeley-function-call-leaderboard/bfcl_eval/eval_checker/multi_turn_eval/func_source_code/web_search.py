@@ -239,7 +239,6 @@ class WebSearchAPI:
             }
 
         web_results = search_results["web"]["results"]
-        breakpoint()
 
         # Convert the search results to the desired format
         results = []

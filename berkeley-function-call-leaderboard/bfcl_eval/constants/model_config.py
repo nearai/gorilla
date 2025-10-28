@@ -3,12 +3,12 @@ from typing import Optional
 
 from bfcl_eval.model_handler.api_inference.claude import ClaudeHandler
 from bfcl_eval.model_handler.api_inference.cohere import CohereHandler
-from bfcl_eval.model_handler.api_inference.deepseek import DeepSeekAPIHandler
+from bfcl_eval.model_handler.api_inference.deepseek import DeepSeekAPIHandler, DeepSeekInternalAPIHandler
 from bfcl_eval.model_handler.api_inference.dm_cito import DMCitoHandler
 from bfcl_eval.model_handler.api_inference.fireworks import FireworksHandler
 from bfcl_eval.model_handler.api_inference.functionary import FunctionaryHandler
 from bfcl_eval.model_handler.api_inference.gemini import GeminiHandler
-from bfcl_eval.model_handler.api_inference.glm import GLMAPIHandler
+from bfcl_eval.model_handler.api_inference.glm import GLMAPIHandler, GLMAPILocalHandler
 from bfcl_eval.model_handler.api_inference.gogoagent import GoGoAgentHandler
 from bfcl_eval.model_handler.api_inference.gorilla import GorillaHandler
 from bfcl_eval.model_handler.api_inference.grok import GrokHandler
@@ -42,6 +42,7 @@ from bfcl_eval.model_handler.local_inference.glm import GLMHandler
 from bfcl_eval.model_handler.local_inference.granite import (
     GraniteFunctionCallingHandler,
 )
+from bfcl_eval.model_handler.api_inference.gpt_oss import GPTOSSInternalAPIHandler
 from bfcl_eval.model_handler.local_inference.granite_3 import Granite3FCHandler
 from bfcl_eval.model_handler.local_inference.hammer import HammerHandler
 from bfcl_eval.model_handler.local_inference.llama import LlamaHandler
@@ -119,6 +120,30 @@ api_inference_model_map = {
         org="Gorilla LLM",
         license="Apache 2.0",
         model_handler=GorillaHandler,
+        input_price=None,
+        output_price=None,
+        is_fc_model=True,
+        underscore_to_dot=False,
+    ),
+    "openai/gpt-oss-120b-FC": ModelConfig(
+        model_name="openai/gpt-oss-120b",
+        display_name="GPT-OSS-120B (FC)",
+        url="https://openai.com/index/introducing-gpt-oss/",
+        org="OpenAI",
+        license="Proprietary",
+        model_handler=GPTOSSInternalAPIHandler,
+        input_price=None,
+        output_price=None,
+        is_fc_model=True,
+        underscore_to_dot=False,
+    ),
+    "deepseek-ai/DeepSeek-V3.1-FC": ModelConfig(
+        model_name="deepseek-ai/DeepSeek-V3.1",
+        display_name="DeepSeek-V3.1 (FC)",
+        url="https://api-docs.deepseek.com/news/news250528",
+        org="DeepSeek",
+        license="MIT",
+        model_handler=DeepSeekInternalAPIHandler,
         input_price=None,
         output_price=None,
         is_fc_model=True,
@@ -1071,6 +1096,30 @@ api_inference_model_map = {
         output_price=None,
         is_fc_model=False,
         underscore_to_dot=False,
+    ),
+    "zai-org/GLM-4.6-FC": ModelConfig(
+        model_name="zai-org/GLM-4.6",
+        display_name="GLM-4.6 (FC)",
+        url="https://huggingface.co/zai-org/GLM-4.6",
+        org="Zhipu AI",
+        license="MIT",
+        model_handler=GLMAPILocalHandler,
+        input_price=None,
+        output_price=None,
+        is_fc_model=True,
+        underscore_to_dot=True,
+    ),
+    "zai-org/GLM-4.5-FC": ModelConfig(
+        model_name="zai-org/GLM-4.5",
+        display_name="GLM-4.5 (FC)",
+        url="https://huggingface.co/zai-org/GLM-4.5",
+        org="Zhipu AI",
+        license="MIT",
+        model_handler=GLMAPILocalHandler,
+        input_price=None,
+        output_price=None,
+        is_fc_model=True,
+        underscore_to_dot=True,
     ),
     "glm-4.5-FC": ModelConfig(
         model_name="glm-4.5",
